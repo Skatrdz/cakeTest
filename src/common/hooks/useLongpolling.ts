@@ -6,6 +6,7 @@ export const usePollingRequest = (
     url: string,
     urlPoll: string,
     delay: number | null,
+    lastTimestamp: React.MutableRefObject<number>,
 ): CurrencyRates => {
     const [rates, setRates] = useState<CurrencyRates>({
         RUB: 0,
@@ -31,10 +32,10 @@ export const usePollingRequest = (
     const getPoll = useCallback((urlPoll: string) => {
         getRates(urlPoll)
             .then((res: DateCurrencyRates) => {
-
-                setRates(res.rates)
-
-
+                if (res.timestamp >= lastTimestamp.current) {
+                    lastTimestamp.current = res.timestamp
+                    setRates(res.rates)
+                }
             })
             .catch((error: Error) => {
                 clearPolling()

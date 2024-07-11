@@ -2,7 +2,7 @@ import './currencyTable.css'
 import {MinValueHighlight} from "../common/utils/minValueHighlight";
 import {usePollingRequest} from "../common/hooks/useLongpolling";
 import {roundToThreeDecimals} from "../common/utils/roundToThreeDecimals";
-import {memo} from "react";
+import {memo, useRef} from "react";
 
 export const CurrencyTable = () => {
     const TableHeader = memo(() => (
@@ -16,21 +16,28 @@ export const CurrencyTable = () => {
         </thead>
     ))
 
+    const firstTimeStamp = useRef<number>(0)
+    const secondTimeStamp = useRef<number>(0)
+    const thirdTimeStamp = useRef<number>(0)
+
 
     const firstRates = usePollingRequest(
         'first',
         'first/poll',
-        2500
+        2500,
+        firstTimeStamp,
     )
     const secondRates = usePollingRequest(
         'second',
         'second/poll',
-        600
+        600,
+        secondTimeStamp,
     )
     const thirdRates = usePollingRequest(
         'third',
         'third/poll',
-        3500
+        3500,
+        thirdTimeStamp,
     )
 
     return (
