@@ -1,3 +1,9 @@
+import {CurrencyTable} from "./currencyTable/currencyTable";
+
 export const App = () => {
-    return <div>cake</div>
+    return (
+        <div className='app'>
+            <CurrencyTable />
+        </div>
+    )
 }
