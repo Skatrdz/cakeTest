@@ -1,4 +1,5 @@
 import './currencyTable.css'
+import {MinValueHighlight} from "../utils/minValueHighlight";
 
 export const CurrencyTable = () => {
 
@@ -16,13 +17,14 @@ export const CurrencyTable = () => {
             <tbody>
             <tr>
                 <td>RUB/CUPCAKE</td>
+                {MinValueHighlight([50, 55, 56])}
+
             </tr>
 
             <tr>
                 <td>USD/CUPCAKE</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
+                {MinValueHighlight([10, 25, 15])}
+
             </tr>
 
             <tr>
