@@ -1,7 +1,25 @@
 import './currencyTable.css'
-import {MinValueHighlight} from "../utils/minValueHighlight";
+import {MinValueHighlight} from "../common/utils/minValueHighlight";
+import {usePollingRequest} from "../common/hooks/useLongpolling";
 
 export const CurrencyTable = () => {
+
+
+    const firstRates = usePollingRequest(
+        'first',
+        'first/poll',
+        2500
+    )
+    const secondRates = usePollingRequest(
+        'second',
+        'second/poll',
+        600
+    )
+    const thirdRates = usePollingRequest(
+        'third',
+        'third/poll',
+        3500
+    )
 
     return (
         <table className='currency-table'>
@@ -17,14 +35,18 @@ export const CurrencyTable = () => {
             <tbody>
             <tr>
                 <td>RUB/CUPCAKE</td>
-                {MinValueHighlight([50, 55, 56])}
-
+                {MinValueHighlight([
+                firstRates.RUB,
+                secondRates.RUB,
+                thirdRates.RUB])}
             </tr>
 
             <tr>
                 <td>USD/CUPCAKE</td>
-                {MinValueHighlight([10, 25, 15])}
-
+                {MinValueHighlight([
+                    firstRates.USD,
+                    secondRates.USD,
+                    thirdRates.USD])}
             </tr>
 
             <tr>
