@@ -1,0 +1,12 @@
+/node_modules
+/dist
+/.pnp
+.DS_Store
+npm-debug.log*
+*.log
+
+# env
+.env
+
+# Editor directories and files
+.idea
